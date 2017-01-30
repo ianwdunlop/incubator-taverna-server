@@ -27,6 +27,25 @@ limitations under the License.
 	<description>Basic Java bindings for the OGF Usage Record Format, version 1.0, plus a simple wrapper to make working with it easier.</description>
 	<build>
 		<plugins>
+			      <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-remote-resources-plugin</artifactId>
+					<version>1.5</version>
+					<configuration>
+						<resourceBundles>
+							<resourceBundle>uk.org.taverna:shared-resources:1</resourceBundle>
+						</resourceBundles>
+						<outputDirectory>${basedir}/src/main/xsd</outputDirectory>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>process</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+	
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
@@ -40,6 +59,7 @@ limitations under the License.
 						<configuration>
 							<outputDirectory>${project.build.directory}/generated-sources/xjc</outputDirectory>
 							<schemaDirectory>${basedir}/src/main/xsd</schemaDirectory>
+							<!-- <schemaDirectory>${project.build.directory}/maven-shared-archive-resources</schemaDirectory> -->
 						</configuration>
 					</execution>
 				</executions>
